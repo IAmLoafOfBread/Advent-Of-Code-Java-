@@ -32,8 +32,40 @@ public class Main{
     }
   };
 
+  public static class resultOutput{
+    public int value = 0;
+    private boolean solved = false;
+    private reportInput input;
+
+    public resultOutput(reportInput in){
+
+      input = in;
+
+    }
+
+    public int calculate(int window){
+
+      for(int i = 0; i < input.count - window; i++){
+        int Comparer = 0;
+        int Comparee = 0;
+        for(int j = 0; j < window; j++){
+          Comparee += input.values.get(i + j);
+          Comparer += input.values.get((i + j) + 1);
+        }
+        if(Comparee < Comparer){
+          value++;
+        }
+      }
+
+      return value;
+
+    }
+  };
+
   public static void main(String[] args) throws IOException{
     reportInput Input = new reportInput("Input.txt");
+    resultOutput Output = new resultOutput(Input);
+    System.out.println(Output.calculate(3));
 
 /************TESTING PARSER****************/
 //    for(int i = 0; i < Input.count; i++){
